@@ -49,17 +49,17 @@ public:
         // The message start string is designed to be unlikely to occur in normal data.
         // The characters are rarely used upper ASCII, not valid as UTF-8, and produce
         // a large 4-byte int at any alignment.
-        pchMessageStart[0] = 0xa1;
-        pchMessageStart[1] = 0xa2;
-        pchMessageStart[2] = 0xa3;
-        pchMessageStart[3] = 0x4b;
-        vAlertPubKey = ParseHex("04e22531e96c9056be6b659c91a94fbfebeb5d517698712acdbef262f7c2f81f85d131a669df3be611393f454852a2d08c6314bba5ca3cbe5616262da3d4a6efac");
-        nDefaultPort = 51441;
-        nRPCPort = 51221;
+        pchMessageStart[0] = 0xa4;
+        pchMessageStart[1] = 0xa3;
+        pchMessageStart[2] = 0xa2;
+        pchMessageStart[3] = 0x1b;
+        vAlertPubKey = ParseHex("04e22531e96c9056be6b659c9116589febeb5d5176987116578ef262f7c2f81f85d131a615df3be611393f454852a2d08c6314bba5ca3cbe5616262da3d4a6efac");
+        nDefaultPort = 47224;
+        nRPCPort = 47444;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 16);
         bnProofOfStakeLimit = CBigNum(~uint256(0) >> 20);
 
-        const char* pszTimestamp = "Is Right Now a Good Time to Buy Bitcoin? | JP Buntinx | December 13, 2018";
+        const char* pszTimestamp = "Litecoin Price Responds Kindly to Lightning Network and OpenBazaar News | JP Buntinx | January 19th, 2019";
         std::vector<CTxIn> vin;
         vin.resize(1);
         vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -80,7 +80,7 @@ public:
         /*
         Hashed MainNet Genesis Block Output
         block.hashMerkleRoot == e7de676978b0c7cc62b0ed631929044ac04c9143c83833f4f46cf347a0ac9a94
-        block.nTime = 1544904000
+        block.nTime = 1547971200
         block.nNonce = 24768
         block.GetHash = 00006dfa0fec1755bed8d26474969c29fcc63e2e7abd6032e79e548c15094767
         */
@@ -89,10 +89,10 @@ public:
         assert(hashGenesisBlock == nGenesisBlock);
         assert(genesis.hashMerkleRoot == nGenesisMerkle);
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,32);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,53);
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,30);
-        base58Prefixes[STEALTH_ADDRESS] = std::vector<unsigned char>(1,75);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,25);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,65);
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,26);
+        base58Prefixes[STEALTH_ADDRESS] = std::vector<unsigned char>(1,63);
         base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
         base58Prefixes[EXT_SECRET_KEY] = list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
 
@@ -128,15 +128,15 @@ public:
         // The message start string is designed to be unlikely to occur in normal data.
         // The characters are rarely used upper ASCII, not valid as UTF-8, and produce
         // a large 4-byte int at any alignment.
-        pchMessageStart[0] = 0x1b;
-        pchMessageStart[1] = 0x2b;
-        pchMessageStart[2] = 0x3b;
-        pchMessageStart[3] = 0xc4;
+        pchMessageStart[0] = 0x4b;
+        pchMessageStart[1] = 0x3b;
+        pchMessageStart[2] = 0x2b;
+        pchMessageStart[3] = 0xc1;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 14);
         bnProofOfStakeLimit = CBigNum(~uint256(0) >> 18);
-        vAlertPubKey = ParseHex("02e22531e96c9056be6b659c91a94fbfebeb5d5257f139876af26abab1c2f81f85d131a669df3be611393f454852a2d08c6314bba5ca3cbe5616262db3d4a6efac");
-        nDefaultPort = 31224;
-        nRPCPort = 31220;
+        vAlertPubKey = ParseHex("02e22531e96c9056be6b156781a94fbf45678d5257f139876af26a764322f81f85d131a669df3b4911393f454852a2d759ae7bba5ca3cbe5616262db3d4a6efac");
+        nDefaultPort = 47664;
+        nRPCPort = 47774;
         strDataDir = "testnet";
 
         // Modify the testnet genesis block so the timestamp is valid for a later start.
@@ -159,10 +159,10 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,92);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,112);
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,90);
-        base58Prefixes[STEALTH_ADDRESS] = std::vector<unsigned char>(1,137);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,27);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,33);
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,23);
+        base58Prefixes[STEALTH_ADDRESS] = std::vector<unsigned char>(1,64);
         base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x04)(0x35)(0x87)(0xCF).convert_to_container<std::vector<unsigned char> >();
         base58Prefixes[EXT_SECRET_KEY] = list_of(0x04)(0x35)(0x83)(0x94).convert_to_container<std::vector<unsigned char> >();
 
@@ -178,16 +178,16 @@ static CTestNetParams testNetParams;
 class CRegTestParams : public CTestNetParams {
 public:
     CRegTestParams() {
-        pchMessageStart[0] = 0xc1;
-        pchMessageStart[1] = 0xc2;
-        pchMessageStart[2] = 0xc3;
-        pchMessageStart[3] = 0x4e;
+        pchMessageStart[0] = 0xc4;
+        pchMessageStart[1] = 0xc3;
+        pchMessageStart[2] = 0xc2;
+        pchMessageStart[3] = 0x1e;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 1);
         genesis.nTime = timeRegNetGenesis;
         genesis.nBits  = bnProofOfWorkLimit.GetCompact();
         genesis.nNonce = 8;
         hashGenesisBlock = genesis.GetHash();
-        nDefaultPort = 31223;
+        nDefaultPort = 47114;
         strDataDir = "regtest";
 
         /** Genesis Block RegNet */
