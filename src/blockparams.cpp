@@ -370,19 +370,19 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfS
 //
 //
 // Reward calculations for 75-years of TBB emissions
-// 100% Remaining TBB   : 8,760,000,000
+// 100% Remaining TBB   : 8,957,100,000
 // ----------------------------------
-// 100% for Calculations: 320 blocks per day, ~80 Superblocks, ~240 Normalblocks @ 25% chance Superblock
+// 100% for Calculations: 320 blocks per day, ~80 Superblocks, ~240 Normalblocks @ 12% chance Superblock
 // 25% for Superblocks  : (((80 * 1240)*365)*75) 2,715,600,000 TBB
-// 75% for Normalblocks : (((240 * 920)*365)*75) = 6,570,000,000 TBB
+// 75% for Normalblocks : (((240 * 950)*365)*75) = 6,241,500,000 TBB
 // ----------------------------------
 // (COINS LEFT)       (BLOCKS | 75-Years of minting)
-// Singular Payout Example: 8760000000 / ((((1 * 60 * 60) / (4.5 * 60) * 24) * 365) * 75) = 1000.00 TBB per block
+// Singular Payout Example: 8957100000 / ((((1 * 60 * 60) / (4.5 * 60) * 24) * 365) * 75) = 1022.00 TBB per block
 // Superblock Payout: ~80 blocks per day = 1240.00 TBB per Superblock
-// Regular Payout: ~240 blocks per day = 920.00 TBB per block
-// Daily coins (Regular + Superblock): (80 * 1240) + (240 * 920) = 320,000 per day == 1,000.00 TBB per block avg
-// Yearly coins (Regular + Superblock): ((80 * 1240)*365) + ((240 * 920)*365) = 116,800,000 per year == 1,000.00 TBB per block avg
-// Total coins (Regular + Superblock): (((80 * 1240)*365)*75) + (((240 * 920)*365)*75) = 8,760,000,000 == 100% Remaining TBB
+// Regular Payout: ~240 blocks per day = 950.00 TBB per block
+// Daily coins (Regular + Superblock): (80 * 1240) + (240 * 950) = 327,200 per day == 1,000.00 TBB per block avg
+// Yearly coins (Regular + Superblock): ((80 * 1240)*365) + ((240 * 950)*365) = 119,428,000 per year == 1,000.00 TBB per block avg
+// Total coins (Regular + Superblock): (((80 * 1240)*365)*75) + (((240 * 950)*365)*75) = 8,957,100,000 == 100% Remaining TBB
 
 int static generateMTRandom(unsigned int s, int range)
 {
@@ -411,9 +411,9 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
 {
     int64_t nSubsidy = nBlockStandardReward;
 
-    int chance = 250000;
+    int chance = 120000;
 
-    if(randreward() <= chance) // 25% Chance of superblock
+    if(randreward() <= chance) // 12% Chance of superblock
         nSubsidy = nBlockSuperReward;
 
     if(nHeight > nReservePhaseStart) {
@@ -445,9 +445,9 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
 {
     int64_t nSubsidy = nBlockStandardReward;
 
-    int chance = 250000;
+    int chance = 120000;
 
-    if(randreward() <= chance) // 25% Chance of superblock
+    if(randreward() <= chance) // 12% Chance of superblock
         nSubsidy = nBlockSuperReward;
 
     if(pindexPrev->nHeight+1 > nReservePhaseStart) {

@@ -61,7 +61,7 @@ static const int64_t MIN_TX_COUNT = 0;
 /** Minimum TX value (for relaying) */
 static const int64_t MIN_TX_VALUE = 0.01 * COIN;
 /** No amount larger than this (in satoshi) is valid */
-static const int64_t MAX_SINGLE_TX = 8850000000 * COIN; // 8.85 Billion BlueBeasts-Coin coins
+static const int64_t MAX_SINGLE_TX = 8957100000 * COIN; // 8.9571 Billion BlueBeasts-Coin
 /** Moneyrange params */
 inline bool MoneyRange(int64_t nValue) { return (nValue >= 0 && nValue <= MAX_SINGLE_TX); }
 /** Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp. */
