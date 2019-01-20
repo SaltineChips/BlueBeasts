@@ -79,10 +79,10 @@ public:
         /** Genesis Block MainNet */
         /*
         Hashed MainNet Genesis Block Output
-        block.hashMerkleRoot == e7de676978b0c7cc62b0ed631929044ac04c9143c83833f4f46cf347a0ac9a94
+        block.hashMerkleRoot == 7e4a56d5f02212f77401ab68d785afcdc8b905400f6edb6c9ef32bc73e6d2584
         block.nTime = 1547971200
-        block.nNonce = 24768
-        block.GetHash = 00006dfa0fec1755bed8d26474969c29fcc63e2e7abd6032e79e548c15094767
+        block.nNonce = 84159
+        block.GetHash = 0000def26124d03147fc55f263467856aa3e1f54b62e256c7cef56878f97ee9f
         */
 
         hashGenesisBlock = genesis.GetHash();
@@ -147,10 +147,10 @@ public:
         /** Genesis Block TestNet */
         /*
         Hashed TestNet Genesis Block Output
-        block.hashMerkleRoot == e7de676978b0c7cc62b0ed631929044ac04c9143c83833f4f46cf347a0ac9a94
-        block.nTime = 1544904030
-        block.nNonce = 2868
-        block.GetHash = 0002a59dd63d5fa8b515f15144ce6a7ada594e63371f652f833e555e7e3b33b7
+        block.hashMerkleRoot == 7e4a56d5f02212f77401ab68d785afcdc8b905400f6edb6c9ef32bc73e6d2584
+        block.nTime = 1547971230
+        block.nNonce = 20838
+        block.GetHash = 00020a06f69c91832fbace0e4c5db6bf35432c8a3a9f88469da308c28551e9d9
         */
 
         hashGenesisBlock = genesis.GetHash();
@@ -193,12 +193,12 @@ public:
         /** Genesis Block RegNet */
         /*
         Hashed RegNet Genesis Block Output
-        block.hashMerkleRoot == e7de676978b0c7cc62b0ed631929044ac04c9143c83833f4f46cf347a0ac9a94
-        block.nTime = 1544904090
+        block.hashMerkleRoot == 7e4a56d5f02212f77401ab68d785afcdc8b905400f6edb6c9ef32bc73e6d2584
+        block.nTime = 1547971290
         block.nNonce = 8
-        block.GetHash = 3762eb656c953854e41c33f6691bd723cca09817d4a6b7bae214e88e3c3c73d4
-
+        block.GetHash = 01efdddac6a979b0e89c84dedc0dcb29b4834b89cea514fefb689cbf188b42d8
         */
+
         assert(hashGenesisBlock == hashRegNetGenesisBlock);
 
         vSeeds.clear();  // Regtest mode doesn't have any DNS seeds.
