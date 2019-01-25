@@ -1209,8 +1209,8 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
 
                std::string str(s, 32);
                fprintf(ConfFile, "rpcpassword=%s\n", str.c_str());
-               fprintf(ConfFile, "port=51441\n");
-               fprintf(ConfFile, "rpcport=51221\n");
+               fprintf(ConfFile, "port=47224\n");
+               fprintf(ConfFile, "rpcport=47444\n");
                fprintf(ConfFile, "rpcconnect=127.0.0.1\n");
                fprintf(ConfFile, "rpcallowip=127.0.0.1\n");
               // fprintf(ConfFile, "addnode=cryptonode.online\n");

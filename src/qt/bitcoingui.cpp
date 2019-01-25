@@ -443,7 +443,7 @@ void BlueBeastsCoinGUI::createToolBars()
     toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     toolbar->setContextMenuPolicy(Qt::PreventContextMenu);
     toolbar->setObjectName("tabs");
-    toolbar->setStyleSheet("QToolButton { color: #ffffff; font-weight:bold; } QToolButton:hover { background-color: #053f86; } QToolButton:checked { background-color: #043168 } QToolButton:pressed { background-color: #043877; } #tabs { color: #ffffff; background-color: #292c30; }");
+    toolbar->setStyleSheet("QToolButton { color: #ffffff; font-weight:bold; } QToolButton:hover { background-color: #053f86; } QToolButton:checked { background-color: #043168 } QToolButton:pressed { background-color: #043877; } #tabs { color: #ffffff; background-color: #064695; }");
     toolbar->setIconSize(QSize(24,24));
 
     if(!fUseBlackTheme)
