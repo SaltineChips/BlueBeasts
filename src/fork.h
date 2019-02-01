@@ -11,10 +11,6 @@
 
 /** Reserve Phase start block */ 
 static const int64_t nReservePhaseStart = 1;
-/** Maximum single TX definition */
-static const int64_t nMaxSingleTX = 8957100000;
-/** Reserve Phase prolong block */
-static const int64_t nReservePhaseProlong = (nMaxSingleTX  / nBlockRewardReserve) * 5;
 /** Velocity toggle block */
 static const int64_t VELOCITY_TOGGLE = 300; // Implementation of the Velocity system into the chain.
 /** Velocity retarget toggle block */
