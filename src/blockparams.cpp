@@ -416,6 +416,12 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
     if(randreward() <= chance) // 12% Chance of superblock
         nSubsidy = nBlockSuperReward;
 
+          if(nHeight > nReservePhaseStart) {
+        if(pindexBest->nMoneySupply < (nBlockRewardReserve * 100)) {
+            nSubsidy = nBlockRewardReserve;
+        }
+    }
+
     // hardCap v2.1
     else if(pindexBest->nMoneySupply > MAX_SINGLE_TX)
     {
@@ -439,6 +445,12 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
     if(randreward() <= chance) // 12% Chance of superblock
         nSubsidy = nBlockSuperReward;
 
+    if(pindexPrev->nHeight+1 > nReservePhaseStart) {
+        if(pindexBest->nMoneySupply < (nBlockRewardReserve * 100)) {
+            nSubsidy = nBlockRewardReserve;
+        }
+    }
+
     // hardCap v2.1
     else if(pindexBest->nMoneySupply > MAX_SINGLE_TX)
     {
@@ -448,6 +460,7 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
 
     LogPrint("creation", "GetProofOfStakeReward(): create=%s nCoinAge=%d\n", FormatMoney(nSubsidy), nCoinAge);
     return nSubsidy + nFees;
+
 }
 
 //

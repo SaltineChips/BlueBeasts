@@ -16,7 +16,7 @@ static const unsigned int nModifierInterval = 2 * 60;
 /** Genesis block subsidy */
 static const int64_t nGenesisBlockReward = 1 * COIN;
 /** Reserve block subsidy */
-static const int64_t nBlockRewardReserve = 223927500 * COIN; // 2.5% Reserved for Development ~223 Million
+static const int64_t nBlockRewardReserve = 2239275 * COIN; // 2.5% Reserved for Development ~223.9275 Million
 /** Standard block subsidy */
 static const int64_t nBlockStandardReward = 950 * COIN;
 /** Superblock block subsidy */
