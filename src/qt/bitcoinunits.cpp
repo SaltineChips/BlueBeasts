@@ -74,9 +74,9 @@ int BlueBeastsCoinUnits::amountDigits(int unit)
 {
     switch(unit)
     {
-    case TBB: return 8; // 21,000,000 (# digits, without commas)
-    case mIVC: return 11; // 21,000,000,000
-    case uIVC: return 14; // 21,000,000,000,000
+    case TBB: return 11;     //              21,000,000,000 (# digits, without commas)
+    case mIVC: return 14;  //       21,000,000,000,000
+    case uIVC: return 17;  // 21,000,000,000,000,000
     default: return 0;
     }
 }

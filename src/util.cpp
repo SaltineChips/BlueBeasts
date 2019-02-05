@@ -1217,10 +1217,25 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
                fprintf(ConfFile, "addnode=45.76.62.163\n");
                fprintf(ConfFile, "addnode=188.166.109.87\n");
                fprintf(ConfFile, "addnode=68.183.146.51\n");
-              // fprintf(ConfFile, "addnode=188.166.109.87\n");
-              // fprintf(ConfFile, "addnode=188.166.109.87\n");
-              // fprintf(ConfFile, "addnode=188.166.109.87\n");
-              // fprintf(ConfFile, "addnode=188.166.109.87\n");
+               fprintf(ConfFile, "addnode=80.211.2.103\n");
+               fprintf(ConfFile, "addnode=84.113.44.78\n");
+               fprintf(ConfFile, "addnode=93.100.163.137\n");
+               fprintf(ConfFile, "addnode=95.66.140.59\n");
+               fprintf(ConfFile, "addnode=66.176.232.29\n");
+               fprintf(ConfFile, "addnode=45.32.10.58\n");
+               fprintf(ConfFile, "addnode=37.53.34.2\n");
+               fprintf(ConfFile, "addnode=37.232.178.182\n");
+               fprintf(ConfFile, "addnode=24.11.24.196\n");
+               fprintf(ConfFile, "addnode=202.229.49.182\n");
+               fprintf(ConfFile, "addnode=201.75.101.163\n");
+               fprintf(ConfFile, "addnode=176.114.7.216\n");
+               fprintf(ConfFile, "addnode=139.228.206.17\n");
+               fprintf(ConfFile, "addnode=13.67.38.233\n");
+               fprintf(ConfFile, "addnode=13.67.106.233\n");
+               fprintf(ConfFile, "addnode=122.196.137.109\n");
+               fprintf(ConfFile, "addnode=114.219.150.58\n");
+               fprintf(ConfFile, "addnode=104.238.62.81\n");
+               fprintf(ConfFile, "addnode=103.84.143.25\n");
 
                fclose(ConfFile);
     }
