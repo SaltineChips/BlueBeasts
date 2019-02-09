@@ -2535,7 +2535,7 @@ bool CBlock::CheckBlock(bool fCheckPOW, bool fCheckMerkleRoot, bool fCheckSig) c
                         CBitcoinAddress devopaddress;
                         CScript devpayee;
                         if (Params().NetworkID() == CChainParams::MAIN)
-                            devopaddress = CBitcoinAddress("Dtz6UgAxwavsnxnb7jeSRj5cgERLvV8KBy");
+                            devopaddress = CBitcoinAddress("B5gswHKar7fPsjNXnLxWwuJmcx9gqaYXmk");
 
                         int64_t devopsPayment = GetDevOpsPayment(pindexBest->nHeight+1, nPoSageReward);
                         bool foundDevOpspayment = false;

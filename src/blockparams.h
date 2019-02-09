@@ -17,7 +17,7 @@
 #define STOP_MASTERNODE_PAYMENTS               9993058800  // OFF (NOT TOGGLED)
 
 #define START_DEVOPS_PAYMENTS_TESTNET          1548072000  // ON  (Monday, January 21, 2019 12:00:00 PM)
-#define START_DEVOPS_PAYMENTS                  1551513600  // ON  (Saturday, March 2, 2019 8:00:00 AM)
+#define START_DEVOPS_PAYMENTS                  1550174400  // ON  (Thursday, February 14, 2019 8:00:00 PM)
 #define STOP_DEVOPS_PAYMENTS_TESTNET           9993058800  // OFF (NOT TOGGLED)
 #define STOP_DEVOPS_PAYMENTS                   9993058800  // OFF (NOT TOGGLED)
 
