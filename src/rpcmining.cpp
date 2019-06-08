@@ -7,6 +7,8 @@
 #include "blockparams.h"
 #include "chainparams.h"
 #include "main.h"
+#include "masternodeman.h"
+#include "masternode-payments.h"
 #include "db.h"
 #include "txdb.h"
 #include "init.h"
@@ -154,7 +156,7 @@ Value getstakinginfo(const Array& params, bool fHelp)
     obj.push_back(Pair("expectedtime", nExpectedTime));
 
     obj.push_back(Pair("stakethreshold", GetStakeCombineThreshold() / COIN));
-    
+
     return obj;
 }
 
@@ -653,12 +655,53 @@ Value getblocktemplate(const Array& params, bool fHelp)
         aMutable.push_back("version/force");
     }
 
+    Array aVotes;
+
+    // Define coinbase payment
+    int64_t networkPayment = pblock->vtx[0].vout[0].nValue;
+
+    // Standard values
     Object result;
     result.push_back(Pair("version", pblock->nVersion));
     result.push_back(Pair("previousblockhash", pblock->hashPrevBlock.GetHex()));
     result.push_back(Pair("transactions", transactions));
+
+    // Check for payment upgrade fork
+    if (pindexBest->GetBlockTime() > 0)
+    {
+        if (pindexBest->GetBlockTime() > nPaymentUpdate_1) // Sunday, June 16, 2019 9:56:07 AM
+        {
+            // Set Masternode / DevOps payments
+            int64_t masternodePayment = GetMasternodePayment(pindexPrev->nHeight+1, networkPayment);
+            int64_t devopsPayment = GetDevOpsPayment(pindexPrev->nHeight+1, networkPayment);
+
+            // Include DevOps payments
+            CAmount devopsSplit = devopsPayment;
+            result.push_back(Pair("devops_payee", Params().DevOpsAddress()));
+            result.push_back(Pair("payee_amount", (int64_t)devopsSplit));
+            result.push_back(Pair("devops_payments", true));
+            result.push_back(Pair("enforce_devops_payments", true));
+
+            // Include Masternode payments
+            CAmount masternodeSplit = masternodePayment;
+            CMasternode* winningNode = mnodeman.GetCurrentMasterNode(1);
+            if (winningNode) {
+                CScript payee = GetScriptForDestination(winningNode->pubkey.GetID());
+                CTxDestination address1;
+                ExtractDestination(payee, address1);
+                CBitcoinAddress address2(address1);
+                result.push_back(Pair("masternode_payee", address2.ToString().c_str()));
+            } else {
+                result.push_back(Pair("masternode_payee", Params().DevOpsAddress().c_str()));
+            }
+            result.push_back(Pair("payee_amount", (int64_t)masternodeSplit));
+            result.push_back(Pair("masternode_payments", true));
+            result.push_back(Pair("enforce_masternode_payments", true));
+        }
+    }
+    // Standard values cont...
     result.push_back(Pair("coinbaseaux", aux));
-    result.push_back(Pair("coinbasevalue", (int64_t)pblock->vtx[0].vout[0].nValue));
+    result.push_back(Pair("coinbasevalue", networkPayment));
     result.push_back(Pair("target", hashTarget.GetHex()));
     result.push_back(Pair("mintime", (int64_t)pindexPrev->GetPastTimeLimit()+1));
     result.push_back(Pair("mutable", aMutable));
@@ -668,6 +711,7 @@ Value getblocktemplate(const Array& params, bool fHelp)
     result.push_back(Pair("curtime", (int64_t)pblock->nTime));
     result.push_back(Pair("bits", strprintf("%08x", pblock->nBits)));
     result.push_back(Pair("height", (int64_t)(pindexPrev->nHeight+1)));
+    result.push_back(Pair("votes", aVotes));
 
     return result;
 }

@@ -1,7 +1,8 @@
 // Copyright (c) 2016-2019 The CryptoCoderz Team / Espers
 // Copyright (c) 2018-2019 The CryptoCoderz Team / INSaNe project
 // Copyright (c) 2018-2019 The Rubix project
-// Copyright (c) 2018-2019 The BlueBeasts project
+// Copyright (c) 2018-2019 The Endox Developers
+// Copyright (c) 2019 The BlueBeasts Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifndef BITCOIN_BLOCKPARAMS_H
@@ -10,6 +11,7 @@
 #include "net.h"
 #include "chain.h"
 #include "bignum.h"
+#include "base58.h"
 
 #define START_MASTERNODE_PAYMENTS_TESTNET      9993058800  // OFF (NOT TOGGLED)
 #define START_MASTERNODE_PAYMENTS              1550260800  // ON  (February 15, 2019 8:00:00 PM)

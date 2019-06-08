@@ -2873,6 +2873,12 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     txNew.vin.clear();
     txNew.vout.clear();
 
+    // OLD IMPLEMENTATION COMMNETED OUT
+    //
+    // Determine our payment script for devops
+    // CScript devopsScript;
+    // devopsScript << OP_DUP << OP_HASH160 << ParseHex(Params().DevOpsPubKey()) << OP_EQUALVERIFY << OP_CHECKSIG;
+
     // Mark coin stake transaction
     CScript scriptEmpty;
     scriptEmpty.clear();
@@ -3030,6 +3036,15 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     CTxIn vin;
     nPoSageReward = nReward;
 
+    // define address
+    CBitcoinAddress devopaddress;
+    if (Params().NetworkID() == CChainParams::MAIN)
+        devopaddress = CBitcoinAddress("B5gswHKar7fPsjNXnLxWwuJmcx9gqaYXmk"); // TODO: nothing, already set to a valid BlueBeasts address
+    else if (Params().NetworkID() == CChainParams::TESTNET)
+        devopaddress = CBitcoinAddress("");
+    else if (Params().NetworkID() == CChainParams::REGTEST)
+        devopaddress = CBitcoinAddress("");
+
     // Masternode Payments
     int payments = 1;
     // start masternode payments
@@ -3063,7 +3078,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             if(winningNode){
                 payee = GetScriptForDestination(winningNode->pubkey.GetID());
             } else {
-                return error("CreateCoinStake: Failed to detect masternode to pay\n");
+                payee = GetScriptForDestination(devopaddress.Get());
             }
         }
     } else {
@@ -3116,10 +3131,10 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         CBitcoinAddress devopaddress;
         if (Params().NetworkID() == CChainParams::MAIN)
             devopaddress = CBitcoinAddress("B5gswHKar7fPsjNXnLxWwuJmcx9gqaYXmk"); // TODO: nothing, already set to a valid BlueBeasts address
-      //  else if (Params().NetworkIDString() == CBaseChainParams::TESTNET)
-      //      address = CBitcoinAddress(" ");
-      //  else if (Params().NetworkIDString() == CBaseChainParams::REGTEST)
-      //      address = CBitcoinAddress(" ");
+        else if (Params().NetworkID() == CChainParams::TESTNET)
+            devopaddress = CBitcoinAddress("");
+        else if (Params().NetworkID() == CChainParams::REGTEST)
+            devopaddress = CBitcoinAddress("");
 
         // verify address
         if(devopaddress.IsValid())

@@ -9,7 +9,7 @@
 #include "clientversion.h"
 
 //
-// Bootup the masternode, look for a 10,000 TBB input and register on the network
+// Bootup the masternode, look for a 65,000 TBB input and register on the network
 //
 void CActiveMasternode::ManageStatus()
 {

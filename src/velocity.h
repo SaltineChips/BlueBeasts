@@ -1,7 +1,7 @@
 // Copyright (c) 2014 The Cryptocoin Revival Foundation
 // Copyright (c) 2015-2019 The CryptoCoderz Team / Espers
 // Copyright (c) 2018-2019 The Rubix Project
-// Copyright (c) 2018-2019 The BlueBeasts Project
+// Copyright (c) 2019 The BlueBeasts developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
