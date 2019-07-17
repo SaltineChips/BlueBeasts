@@ -669,8 +669,7 @@ Value getblocktemplate(const Array& params, bool fHelp)
     // Check for payment upgrade fork
     if (pindexBest->GetBlockTime() > 0)
     {
-        if (pindexBest->GetBlockTime() > nPaymentUpdate_1) // Sunday, June 16, 2019 9:56:07 AM
-        {
+        if (pindexBest->GetBlockTime() > nLiveForkToggle){// TODO: Verify Upgrade
             // Set Masternode / DevOps payments
             int64_t masternodePayment = GetMasternodePayment(pindexPrev->nHeight+1, networkPayment);
             int64_t devopsPayment = GetDevOpsPayment(pindexPrev->nHeight+1, networkPayment);

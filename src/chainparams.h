@@ -74,7 +74,7 @@ public:
     std::string MNenginePoolDummyAddress() const { return strMNenginePoolDummyAddress; }
     std::string DevOpsAddress() const { return strDevOpsAddress; }
 protected:
-    CChainParams() {};
+    CChainParams() {/* Do Nothing */;}
 
     uint256 hashGenesisBlock;
     MessageStartChars pchMessageStart;

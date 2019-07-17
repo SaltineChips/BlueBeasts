@@ -8,6 +8,7 @@
 #include "txdb.h"
 #include "miner.h"
 #include "kernel.h"
+#include "masternode.h"
 #include "masternodeman.h"
 #include "masternode-payments.h"
 
@@ -15,7 +16,7 @@ using namespace std;
 
 //////////////////////////////////////////////////////////////////////////////
 //
-// BlueBeastsCoinMiner
+// BlueBeasts-CoinMiner
 //
 
 extern unsigned int nMinerSleep;
@@ -76,7 +77,6 @@ public:
 uint64_t nLastBlockTx = 0;
 uint64_t nLastBlockSize = 0;
 int64_t nLastCoinStakeSearchInterval = 0;
- 
 // We want to sort transactions by priority and fee, so:
 typedef boost::tuple<double, double, CTransaction*> TxPriority;
 class TxPriorityCompare
@@ -367,12 +367,12 @@ CBlock* CreateNewBlock(CReserveKey& reservekey, bool fProofOfStake, int64_t* pFe
         if (fDebug && GetBoolArg("-printpriority", false))
             LogPrintf("CreateNewBlock(): total size %u\n", nBlockSize);
         // > TBB <
-        if (!fProofOfStake)
+        if (!fProofOfStake){
             pblock->vtx[0].vout[0].nValue = GetProofOfWorkReward(pindexPrev->nHeight + 1, nFees);
 
             // Check for payment update fork
             if(pindexBest->GetBlockTime() > 0){
-                if(pindexBest->GetBlockTime() > nPaymentUpdate_1){ // Sunday, June 16, 2019 9:56:07 AM
+                if(pindexBest->GetBlockTime() > nLiveForkToggle){ // TODO: Verify upgrade
                     // masternode/devops payment
                     int64_t blockReward = GetProofOfWorkReward(pindexPrev->nHeight + 1, nFees);
                     bool hasPayment = true;
@@ -394,12 +394,13 @@ CBlock* CreateNewBlock(CReserveKey& reservekey, bool fProofOfStake, int64_t* pFe
                     //       Not an issue otherwise, merely a pet peev. Done in a rush...
                     //
                     CBitcoinAddress devopaddress;
-                    if (Params().NetworkID() == CChainParams::MAIN)
-                        devopaddress = CBitcoinAddress("dSCXLHTZJJqTej8ZRszZxbLrS6dDGVJhw7"); // TODO: nothing, already set to a valid DigitalNote address
-                    else if (Params().NetworkID() == CChainParams::TESTNET)
+                    if (Params().NetworkID() == CChainParams::MAIN) {
+                        devopaddress = CBitcoinAddress("B5gswHKar7fPsjNXnLxWwuJmcx9gqaYXmk");
+                    } else if (Params().NetworkID() == CChainParams::TESTNET) {
                         devopaddress = CBitcoinAddress("");
-                    else if (Params().NetworkID() == CChainParams::REGTEST)
+                    } else if (Params().NetworkID() == CChainParams::REGTEST) {
                         devopaddress = CBitcoinAddress("");
+                    }
 
                     // verify address
                     if(devopaddress.IsValid())
@@ -457,14 +458,13 @@ CBlock* CreateNewBlock(CReserveKey& reservekey, bool fProofOfStake, int64_t* pFe
             } //
         }
 
-        if (pFees) {
+        if (pFees)
             *pFees = nFees;
 
         // Fill in header
         pblock->hashPrevBlock  = pindexPrev->GetBlockHash();
         pblock->nTime          = max(pindexPrev->GetPastTimeLimit()+1, pblock->GetMaxTransactionTime());
-        }
-        if (!fProofOfStake) {
+        if (!fProofOfStake)
             pblock->UpdateTime(pindexPrev);
         pblock->nNonce         = 0;
     }

@@ -90,7 +90,7 @@ int64_t enforceMasternodePaymentsTime = 4085657524;
 int nMasternodeMinProtocol = 0;
 bool fSucessfullyLoaded = false;
 bool fEnableMNengine = false;
-//Standard Features
+// Standard Features
 map<string, string> mapArgs;
 map<string, vector<string> > mapMultiArgs;
 bool fDebug = false;

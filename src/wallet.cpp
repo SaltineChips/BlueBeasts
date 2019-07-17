@@ -3038,12 +3038,13 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
 
     // define address
     CBitcoinAddress devopaddress;
-    if (Params().NetworkID() == CChainParams::MAIN)
-        devopaddress = CBitcoinAddress("B5gswHKar7fPsjNXnLxWwuJmcx9gqaYXmk"); // TODO: nothing, already set to a valid BlueBeasts address
-    else if (Params().NetworkID() == CChainParams::TESTNET)
+    if (Params().NetworkID() == CChainParams::MAIN) {
+        devopaddress = CBitcoinAddress("B5gswHKar7fPsjNXnLxWwuJmcx9gqaYXmk");
+    } else if (Params().NetworkID() == CChainParams::TESTNET) {
         devopaddress = CBitcoinAddress("");
-    else if (Params().NetworkID() == CChainParams::REGTEST)
+    } else if (Params().NetworkID() == CChainParams::REGTEST) {
         devopaddress = CBitcoinAddress("");
+    }
 
     // Masternode Payments
     int payments = 1;
@@ -3127,15 +3128,6 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
 
     bool hasdevopsPay = true;
     if(bDevOpsPayment) {
-        // define address
-        CBitcoinAddress devopaddress;
-        if (Params().NetworkID() == CChainParams::MAIN)
-            devopaddress = CBitcoinAddress("B5gswHKar7fPsjNXnLxWwuJmcx9gqaYXmk"); // TODO: nothing, already set to a valid BlueBeasts address
-        else if (Params().NetworkID() == CChainParams::TESTNET)
-            devopaddress = CBitcoinAddress("");
-        else if (Params().NetworkID() == CChainParams::REGTEST)
-            devopaddress = CBitcoinAddress("");
-
         // verify address
         if(devopaddress.IsValid())
         {
@@ -3375,7 +3367,7 @@ string CWallet::SendMoneyToDestination(const CTxDestination& address, int64_t nV
     if (nValue + nTransactionFee > GetBalance())
         return _("Insufficient funds");
 
-    // Parse BlueBeastsCoin address
+    // Parse BlueBeasts-Coin address
     CScript scriptPubKey;
     scriptPubKey.SetDestination(address);
 

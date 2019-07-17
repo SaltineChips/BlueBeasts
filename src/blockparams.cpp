@@ -69,6 +69,7 @@ int64_t scantime_1 = 0;
 int64_t scantime_2 = 0;
 int64_t prevPoW = 0; // hybrid value
 int64_t prevPoS = 0; // hybrid value
+uint64_t blkTime = 0;
 uint64_t cntTime = 0;
 uint64_t prvTime = 0;
 uint64_t difTime = 0;
@@ -102,7 +103,7 @@ void VRXswngdebug()
     LogPrintf("Current block-time: %u: \n",difType.c_str(),cntTime);
     LogPrintf("Time since last %s block: %u: \n",difType.c_str(),difTime);
     // Handle updated versions as well as legacy
-    if(GetTime() > nPaymentUpdate_2) {
+    if(GetTime() > nLiveForkToggle) {
         debugHourRounds = hourRounds;
         debugTerminalAverage = TerminalAverage;
         debugDifCurve = difCurve;
@@ -290,6 +291,7 @@ void VRX_ThreadCurve(const CBlockIndex* pindexLast, bool fProofOfStake)
     if(pindexBest->GetBlockTime() > 1520198278) // ON Sunday, March 4, 2018 9:17:58 PM
     {
         // Define time values
+        blkTime = pindexLast->GetBlockTime();
         cntTime = BlockVelocityType->GetBlockTime();
         prvTime = BlockVelocityType->pprev->GetBlockTime();
         difTime = cntTime - prvTime;
@@ -306,9 +308,10 @@ void VRX_ThreadCurve(const CBlockIndex* pindexLast, bool fProofOfStake)
         if(fDebug) VRXswngdebug();
 
         // Version 1.2 Extended Curve Run Upgrade
-        if(pindexLast->nHeight+1 >= nLiveForkToggle && nLiveForkToggle != 0) {
-            difTime = GetTime() - cntTime;
-            if (fProofOfStake) { fCRVreset = true; }// TODO remove PoS diff reset
+        if(pindexLast->nHeight+1 > nLiveForkToggle && nLiveForkToggle != 0) {// TODO: Verifoy Upgrade
+            // Set unbiased comparison
+            difTime = blkTime - cntTime;
+            // Run Curve
             while(difTime > (hourRounds * 60 * 60)) {
                 // Break loop after 5 hours, otherwise time threshold will auto-break loop
                 if (hourRounds > 5){
@@ -336,6 +339,7 @@ void VRX_ThreadCurve(const CBlockIndex* pindexLast, bool fProofOfStake)
 
 void VRX_Dry_Run(const CBlockIndex* pindexLast)
 {
+
     // Check for blocks to index | Allowing for initial chain start
     if (pindexLast->nHeight < scanheight+124) {
         fDryRun = true;
@@ -345,13 +349,17 @@ void VRX_Dry_Run(const CBlockIndex* pindexLast)
     // Reset difficulty for payments update
     if(pindexLast->GetBlockTime() > 0)
     {
-        if(pindexLast->GetBlockTime() > nPaymentUpdate_1) // Monday, May 20, 2019 12:00:00 AM
+        // Do Nothing until go-live
+    }
+
+    // Test Fork
+    if (nLiveForkToggle != 0) {
+        if(pindexLast->nHeight+1 > nLiveForkToggle) // TODO: Verify Upgrade
         {
-            if(pindexLast->GetBlockTime() < nPaymentUpdate_1+480) {
+            if(pindexLast->nHeight+1 < nLiveForkToggle+10) {
                 fDryRun = true;
                 return; // diff reset
-            }
-        }
+                    }
     }
 
     // Standard, non-Dry Run
