@@ -339,7 +339,6 @@ void VRX_ThreadCurve(const CBlockIndex* pindexLast, bool fProofOfStake)
 
 void VRX_Dry_Run(const CBlockIndex* pindexLast)
 {
-
     // Check for blocks to index | Allowing for initial chain start
     if (pindexLast->nHeight < scanheight+124) {
         fDryRun = true;
@@ -359,7 +358,8 @@ void VRX_Dry_Run(const CBlockIndex* pindexLast)
             if(pindexLast->nHeight+1 < nLiveForkToggle+10) {
                 fDryRun = true;
                 return; // diff reset
-                    }
+            }
+        }
     }
 
     // Standard, non-Dry Run
@@ -476,11 +476,12 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
     if(randreward() <= chance) // 12% Chance of superblock
         nSubsidy = nBlockSuperReward;
 
-          if(nHeight > nReservePhaseStart) {
+    if(nHeight > nReservePhaseStart) {
         if(pindexBest->nMoneySupply < (nBlockRewardReserve * 100)) {
             nSubsidy = nBlockRewardReserve;
         }
     }
+
 
     // hardCap v2.1
     else if(pindexBest->nMoneySupply > MAX_SINGLE_TX)
