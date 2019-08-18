@@ -10,15 +10,15 @@
 #include "optionsmodel.h"
 #include "transactiontablemodel.h"
 
-#include "base58.h"
-#include "checkpoints.h"
-#include "db.h"
-#include "keystore.h"
-#include "main.h"
-#include "ui_interface.h"
-#include "wallet.h"
-#include "walletdb.h" // for BackupWallet
-#include "spork.h"
+#include "primitives/base58.h"
+#include "consensus/checkpoints.h"
+#include "database/db.h"
+#include "subcore/keystore.h"
+#include "core/main.h"
+#include "ui/ui_interface.h"
+#include "core/wallet.h"
+#include "database/walletdb.h" // for BackupWallet
+#include "consensus/spork.h"
 
 #include <stdint.h>
 

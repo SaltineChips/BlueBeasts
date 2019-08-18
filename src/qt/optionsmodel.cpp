@@ -6,12 +6,12 @@
 #include "bitcoinunits.h"
 #include "guiutil.h"
 
-#include "init.h"
-#include "main.h"
-#include "net.h"
+#include "util/init.h"
+#include "core/main.h"
+#include "node/net.h"
 #ifdef ENABLE_WALLET
-#include "wallet.h"
-#include "walletdb.h"
+#include "core/wallet.h"
+#include "database/walletdb.h"
 #endif
 
 #include <QNetworkProxy>

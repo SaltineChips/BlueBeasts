@@ -10,9 +10,9 @@
 #include <vector>
 #include <inttypes.h>
 
-#include "util.h"
-#include "serialize.h"
-#include "key.h"
+#include "util/util.h"
+#include "primitives/serialize.h"
+#include "subcore/key.h"
 
 
 typedef std::vector<uint8_t> data_chunk;

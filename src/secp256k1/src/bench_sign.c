@@ -5,7 +5,7 @@
  **********************************************************************/
 
 #include "include/secp256k1.h"
-#include "util.h"
+#include "util/util.h"
 #include "bench.h"
 
 typedef struct {

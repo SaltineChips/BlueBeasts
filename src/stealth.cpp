@@ -3,7 +3,7 @@
 // file license.txt or http://www.opensource.org/licenses/mit-license.php.
 
 #include "stealth.h"
-#include "base58.h"
+#include "primitives/base58.h"
 
 
 #include <openssl/rand.h>

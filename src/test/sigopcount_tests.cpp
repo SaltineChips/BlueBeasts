@@ -2,8 +2,8 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/foreach.hpp>
 
-#include "script.h"
-#include "key.h"
+#include "subcore/script.h"
+#include "subcore/key.h"
 
 using namespace std;
 

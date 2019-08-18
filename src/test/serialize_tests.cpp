@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "serialize.h"
+#include "primitives/serialize.h"
 
 using namespace std;
 

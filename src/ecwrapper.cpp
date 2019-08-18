@@ -4,8 +4,8 @@
 
 #include "ecwrapper.h"
 
-#include "serialize.h"
-#include "uint256.h"
+#include "primitives/serialize.h"
+#include "primitives/uint256.h"
 
 #include <openssl/bn.h>
 #include <openssl/ecdsa.h>

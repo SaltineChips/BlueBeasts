@@ -1,20 +1,17 @@
 TEMPLATE = app
 TARGET = BlueBeasts-Coin-qt
-VERSION = 2.0.1.0
+VERSION = 2.1.2.2
 INCLUDEPATH += src src/json src/qt src/qt/plugins/mrichtexteditor
-QT += core gui widgets network printsupport
+QT += core gui network printsupport
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 DEFINES += ENABLE_WALLET
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
 CONFIG += thread
-CONFIG += widgets
 CONFIG += static
 CONFIG += openssl
 
-greaterThan(QT_MAJOR_VERSION, 4) {
-    QT += widgets
-    DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0
-}
+QMAKE_CXXFLAGS += -fpermissive
 
 win32{
 BOOST_LIB_SUFFIX=-mgw81-mt-s-x32-1_67
@@ -125,7 +122,7 @@ contains(BITCOIN_NEED_QT_PLUGINS, 1) {
 #Build Leveldb
 INCLUDEPATH += src/leveldb/include src/leveldb/helpers
 LIBS += $$PWD/src/leveldb/libleveldb.a $$PWD/src/leveldb/libmemenv.a
-SOURCES += src/txdb-leveldb.cpp
+SOURCES += src/database/txdb-leveldb.cpp
 !win32 {
     # we use QMAKE_CXXFLAGS_RELEASE even without RELEASE=1 because we use RELEASE to indicate linking preferences not -O preferences
     genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a
@@ -217,44 +214,44 @@ HEADERS += src/qt/bitcoingui.h \
     src/qt/importprivatekeydialog.h \
     src/qt/editconfigdialog.h \
     src/qt/bitcoinaddressvalidator.h \
-    src/alert.h \
-    src/blocksizecalculator.h \
-    src/allocators.h \
-    src/addrman.h \
-    src/base58.h \
-    src/bignum.h \
-    src/blockparams.h \
-    src/chainparams.h \
-    src/chainparamsseeds.h \
-    src/checkpoints.h \
-    src/compat.h \
-    src/coincontrol.h \
-    src/fork.h \
-    src/genesis.h \
-    src/mining.h \
-    src/sync.h \
-    src/util.h \
-    src/hash.h \
-    src/uint256.h \
-    src/kernel.h \
-    src/pbkdf2.h \
-    src/serialize.h \
+    src/node/alert.h \
+    src/core/blocksizecalculator.h \
+    src/primitives/allocators.h \
+    src/node/addrman.h \
+    src/primitives/base58.h \
+    src/primitives/bignum.h \
+    src/core/blockparams.h \
+    src/core/chainparams.h \
+    src/core/chainparamsseeds.h \
+    src/consensus/checkpoints.h \
+    src/primitives/compat.h \
+    src/subcore/coincontrol.h \
+    src/consensus/fork.h \
+    src/consensus/genesis.h \
+    src/consensus/mining.h \
+    src/core/sync.h \
+    src/util/util.h \
+    src/subcore/hash.h \
+    src/primitives/uint256.h \
+    src/consensus/kernel.h \
+    src/primitives/pbkdf2.h \
+    src/primitives/serialize.h \
     src/support/cleanse.h \
-    src/chain.h \
-    src/main.h \
-    src/miner.h \
-    src/net.h \
+    src/core/chain.h \
+    src/core/main.h \
+    src/consensus/miner.h \
+    src/node/net.h \
     src/ecwrapper.h \
-    src/key.h \
-    src/pubkey.h \
-    src/db.h \
-    src/txdb.h \
-    src/txmempool.h \
-    src/walletdb.h \
-    src/script.h \
-    src/scrypt.h \
-    src/init.h \
-    src/mruset.h \
+    src/subcore/key.h \
+    src/subcore/pubkey.h \
+    src/database/db.h \
+    src/database/txdb.h \
+    src/subcore/txmempool.h \
+    src/database/walletdb.h \
+    src/subcore/script.h \
+    src/crypto/scrypt/scrypt.h \
+    src/util/init.h \
+    src/primitives/mruset.h \
     src/json/json_spirit_writer_template.h \
     src/json/json_spirit_writer.h \
     src/json/json_spirit_value.h \
@@ -275,46 +272,46 @@ HEADERS += src/qt/bitcoingui.h \
     src/qt/transactiondesc.h \
     src/qt/transactiondescdialog.h \
     src/qt/bitcoinamountfield.h \
-    src/wallet.h \
-    src/keystore.h \
+    src/core/wallet.h \
+    src/subcore/keystore.h \
     src/qt/transactionfilterproxy.h \
     src/qt/transactionview.h \
     src/qt/walletmodel.h \
     src/qt/walletmodeltransaction.h \
-    src/rpcclient.h \
-    src/rpcprotocol.h \
-    src/rpcserver.h \
-    src/rpcvelocity.h \
-    src/limitedmap.h \
+    src/rpc/rpcclient.h \
+    src/rpc/rpcprotocol.h \
+    src/rpc/rpcserver.h \
+    src/rpc/rpcvelocity.h \
+    src/primitives/limitedmap.h \
     src/qt/overviewpage.h \
     src/qt/csvmodelwriter.h \
-    src/crypter.h \
+    src/subcore/crypter.h \
     src/qt/sendcoinsentry.h \
     src/qt/qvalidatedlineedit.h \
     src/qt/bitcoinunits.h \
     src/qt/qvaluecombobox.h \
     src/qt/askpassphrasedialog.h \
-    src/protocol.h \
+    src/subcore/protocol.h \
     src/qt/notificator.h \
     src/qt/paymentserver.h \
-    src/ui_interface.h \
+    src/ui/ui_interface.h \
     src/qt/rpcconsole.h \
-    src/version.h \
-    src/velocity.h \
-    src/netbase.h \
-    src/clientversion.h \
-    src/threadsafety.h \
-    src/tinyformat.h \
+    src/consensus/version.h \
+    src/consensus/velocity.h \
+    src/node/netbase.h \
+    src/consensus/clientversion.h \
+    src/primitives/threadsafety.h \
+    src/primitives/tinyformat.h \
     src/stealth.h \
     src/qt/flowlayout.h \
-    src/masternode.h \
-    src/mnengine.h \
+    src/node/masternode.h \
+    src/node/mnengine.h \
     src/instantx.h \
-    src/activemasternode.h \
-    src/masternodeconfig.h \
-    src/masternodeman.h \
-    src/masternode-payments.h \
-    src/spork.h \
+    src/node/activemasternode.h \
+    src/node/masternodeconfig.h \
+    src/node/masternodeman.h \
+    src/node/masternode-payments.h \
+    src/consensus/spork.h \
     src/crypto/common/common.h \
     src/crypto/common/hmac_sha256.h \
     src/crypto/common/hmac_sha512.h \
@@ -332,7 +329,7 @@ HEADERS += src/qt/bitcoingui.h \
     src/crypto/common/sph_bmw.h \
     src/crypto/common/sph_types.h \
     src/crypto/bmw/bmw512.h \
-    src/limitedmap.h
+    src/primitives/limitedmap.h
 
 SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/transactiontablemodel.cpp \
@@ -349,33 +346,33 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/importprivatekeydialog.cpp \
     src/qt/editconfigdialog.cpp \
     src/qt/bitcoinaddressvalidator.cpp \
-    src/alert.cpp \
-    src/blocksizecalculator.cpp \
-    src/allocators.cpp \
-    src/base58.cpp \
-    src/blockparams.cpp \
-    src/chainparams.cpp \
-    src/version.cpp \
-    src/velocity.cpp \
-    src/sync.cpp \
-    src/txmempool.cpp \
-    src/util.cpp \
-    src/hash.cpp \
-    src/netbase.cpp \
+    src/node/alert.cpp \
+    src/core/blocksizecalculator.cpp \
+    src/primitives/allocators.cpp \
+    src/primitives/base58.cpp \
+    src/core/blockparams.cpp \
+    src/core/chainparams.cpp \
+    src/consensus/version.cpp \
+    src/consensus/velocity.cpp \
+    src/core/sync.cpp \
+    src/subcore/txmempool.cpp \
+    src/util/util.cpp \
+    src/subcore/hash.cpp \
+    src/node/netbase.cpp \
     src/ecwrapper.cpp \
-    src/key.cpp \
-    src/pubkey.cpp \
-    src/script.cpp \
-    src/scrypt.cpp \
-    src/chain.cpp \
-    src/main.cpp \
-    src/miner.cpp \
-    src/init.cpp \
-    src/net.cpp \
-    src/checkpoints.cpp \
-    src/addrman.cpp \
-    src/db.cpp \
-    src/walletdb.cpp \
+    src/subcore/key.cpp \
+    src/subcore/pubkey.cpp \
+    src/subcore/script.cpp \
+    src/crypto/scrypt/scrypt.cpp \
+    src/core/chain.cpp \
+    src/core/main.cpp \
+    src/consensus/miner.cpp \
+    src/util/init.cpp \
+    src/node/net.cpp \
+    src/consensus/checkpoints.cpp \
+    src/node/addrman.cpp \
+    src/database/db.cpp \
+    src/database/walletdb.cpp \
     src/qt/clientmodel.cpp \
     src/qt/guiutil.cpp \
     src/qt/transactionrecord.cpp \
@@ -387,50 +384,50 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/transactiondescdialog.cpp \
     src/qt/bitcoinstrings.cpp \
     src/qt/bitcoinamountfield.cpp \
-    src/wallet.cpp \
-    src/keystore.cpp \
+    src/core/wallet.cpp \
+    src/subcore/keystore.cpp \
     src/qt/transactionfilterproxy.cpp \
     src/qt/transactionview.cpp \
     src/qt/walletmodel.cpp \
     src/qt/walletmodeltransaction.cpp \
-    src/rpcclient.cpp \
-    src/rpcprotocol.cpp \
-    src/rpcserver.cpp \
-    src/rpcdump.cpp \
-    src/rpcmisc.cpp \
-    src/rpcnet.cpp \
-    src/rpcmining.cpp \
-    src/rpcvelocity.cpp \
-    src/rpcwallet.cpp \
-    src/rpcblockchain.cpp \
-    src/rpcrawtransaction.cpp \
+    src/rpc/rpcclient.cpp \
+    src/rpc/rpcprotocol.cpp \
+    src/rpc/rpcserver.cpp \
+    src/rpc/rpcdump.cpp \
+    src/rpc/rpcmisc.cpp \
+    src/rpc/rpcnet.cpp \
+    src/rpc/rpcmining.cpp \
+    src/rpc/rpcvelocity.cpp \
+    src/rpc/rpcwallet.cpp \
+    src/rpc/rpcblockchain.cpp \
+    src/rpc/rpcrawtransaction.cpp \
     src/qt/overviewpage.cpp \
     src/qt/csvmodelwriter.cpp \
-    src/crypter.cpp \
+    src/subcore/crypter.cpp \
     src/qt/sendcoinsentry.cpp \
     src/qt/qvalidatedlineedit.cpp \
     src/qt/bitcoinunits.cpp \
     src/qt/qvaluecombobox.cpp \
     src/qt/askpassphrasedialog.cpp \
-    src/protocol.cpp \
+    src/subcore/protocol.cpp \
     src/qt/notificator.cpp \
     src/qt/paymentserver.cpp \
     src/qt/rpcconsole.cpp \
-    src/noui.cpp \
-    src/kernel.cpp \
-    src/pbkdf2.cpp \
+    src/subcore/noui.cpp \
+    src/consensus/kernel.cpp \
+    src/primitives/pbkdf2.cpp \
     src/support/cleanse.cpp \
     src/stealth.cpp \
     src/qt/flowlayout.cpp \
-    src/masternode.cpp \
-    src/mnengine.cpp \
-    src/rpcmnengine.cpp \
+    src/node/masternode.cpp \
+    src/node/mnengine.cpp \
+    src/rpc/rpcmnengine.cpp \
     src/instantx.cpp \
-    src/activemasternode.cpp \
-    src/masternodeman.cpp \
-    src/masternode-payments.cpp \
-    src/spork.cpp \
-    src/masternodeconfig.cpp \
+    src/node/activemasternode.cpp \
+    src/node/masternodeman.cpp \
+    src/node/masternode-payments.cpp \
+    src/consensus/spork.cpp \
+    src/node/masternodeconfig.cpp \
     src/crypto/common/hmac_sha256.cpp \
     src/crypto/common/hmac_sha512.cpp \
     src/crypto/common/ripemd160.cpp \

@@ -2,8 +2,8 @@
 #include "ui_importprivatekeydialog.h"
 
 #include "addresstablemodel.h"
-#include "base58.h"
-#include "init.h"
+#include "primitives/base58.h"
+#include "util/init.h"
 
 #include <QDataWidgetMapper>
 #include <QMessageBox>

@@ -4,7 +4,7 @@
 
 #include "walletmodeltransaction.h"
 
-#include "wallet.h"
+#include "core/wallet.h"
 
 WalletModelTransaction::WalletModelTransaction(const QList<SendCoinsRecipient> &recipients) :
     recipients(recipients),

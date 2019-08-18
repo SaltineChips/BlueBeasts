@@ -3,10 +3,10 @@
 #include <string>
 #include <vector>
 
-#include "key.h"
-#include "base58.h"
-#include "uint256.h"
-#include "util.h"
+#include "subcore/key.h"
+#include "primitives/base58.h"
+#include "primitives/uint256.h"
+#include "util/util.h"
 
 using namespace std;
 

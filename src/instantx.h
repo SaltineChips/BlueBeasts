@@ -5,15 +5,15 @@
 #ifndef INSTANTX_H
 #define INSTANTX_H
 
-#include "uint256.h"
-#include "sync.h"
-#include "net.h"
-#include "key.h"
-#include "chain.h"
-#include "util.h"
-#include "script.h"
-#include "base58.h"
-#include "main.h"
+#include "primitives/uint256.h"
+#include "core/sync.h"
+#include "node/net.h"
+#include "subcore/key.h"
+#include "core/chain.h"
+#include "util/util.h"
+#include "subcore/script.h"
+#include "primitives/base58.h"
+#include "core/main.h"
 
 using namespace std;
 using namespace boost;

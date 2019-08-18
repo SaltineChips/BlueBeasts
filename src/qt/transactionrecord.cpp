@@ -1,9 +1,9 @@
 #include "transactionrecord.h"
 
-#include "base58.h"
-#include "util.h"
-#include "wallet.h"
-#include "mnengine.h"
+#include "primitives/base58.h"
+#include "util/util.h"
+#include "core/wallet.h"
+#include "node/mnengine.h"
 #include "instantx.h"
 
 #include <stdint.h>
